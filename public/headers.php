@@ -1,4 +1,18 @@
 <?php
+require_once './models/UserModel.php';
+require_once './controllers/AuthController.php';
+
+// Initialize AuthController
+$authController = new AuthController();
+
+// Check if the user is authenticated
+$authenticated = $authController;
+
+// If not authenticated, redirect to the login page
+if (!$authenticated) {
+  header("Location: /Ecommerc_2/project2_Noroozi/login");
+  exit;
+}
 ?>
 
 <!--Header and Navigation Section-->
@@ -25,12 +39,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <?php if (isset($_SESSION['utilisateur'])) {
-          $utilisateur_prenom = $_SESSION['utilisateur_prenom'];
-          $utilisateur_nom = $_SESSION['utilisateur_nom']; ?>
+        <?php if ($authenticated) {
+          // Replace $_SESSION['admin'] with the correct session variable for admin
+          $isAdmin = isset($_SESSION['admin']);
+          $isSuperAdmin = isset($_SESSION['superadmin']);
+          $isClient = isset($_SESSION['client']);
+          $user_fname = ''; // Initialize variables to avoid undefined variable notice
+          $user_lname = '';
+          $quantity = ''; // Initialize variable to avoid undefined variable notice
+
+          if ($isAdmin) {
+            $user_fname = $_SESSION['user_fname'];
+            $user_lname = $_SESSION['user_lname'];
+            $quantity = ''; // Set quantity based on your logic
+          } elseif ($isSuperAdmin) {
+            // Super admin logic
+
+          }
+        ?>
           <li class="nav-item">
-            <a class="btn btn-info" style="font-weight: bold;">Welcome <span class="btn btn-warning" style="color:white; font-weight: bold;"><?php echo $utilisateur_prenom . " (" . $utilisateur_nom . ")"; ?>
-              </span></a>
+            <a class="nav-link active" href="login"><i class="bi bi-shop"></i> Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="products"><i class="bi bi-shop"></i> Shop</a>
@@ -45,7 +73,7 @@
               </span>
             </a>
           </li>
-          <?php if ($_SESSION['roleU'] == "Admin") { ?>
+          <?php if ($isSuperAdmin) { ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-database-fill-lock"></i> Administration</a>
               <ul class="dropdown-menu">
@@ -59,15 +87,14 @@
               </ul>
             </li>
           <?php } ?>
-        <?php } else ?>
-        <?php if (!isset($_SESSION['utilisateur'])) { ?>
+        <?php } elseif ($isClient) { ?>
           <li class="nav-item">
-            <a class="nav-link active" href="login"><i class="bi bi-box-arrow-in-right"></i> Sign in</a>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <a class="nav-link active" href="logout"><i class="bi bi-box-arrow-right"></i> Log Out</a>
           </li>
         <?php } else { ?>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
           <li class="nav-item">
-            <a class="nav-link active" href="logout"><i class="bi bi-box-arrow-right"></i> Log Out</a>
+            <a class="nav-link active" href="login"><i class="bi bi-box-arrow-in-right"></i> Sign in</a>
           </li>
         <?php } ?>
       </ul>

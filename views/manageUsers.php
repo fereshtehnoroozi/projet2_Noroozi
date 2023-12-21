@@ -1,7 +1,6 @@
 <?php
 include "./public/headers.php";
-/* require_once './models/UserModel.php';
- */
+
 global $viewData;
 $users = $viewData['users'];
 

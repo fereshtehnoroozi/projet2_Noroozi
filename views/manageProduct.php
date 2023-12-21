@@ -1,8 +1,10 @@
 <?php
 include "./public/headers.php";
-require_once './models/CartModel.php';
-require_once './models/ProductModel.php';
 
+global $viewData;
+$users = $viewData['product'];
+
+var_dump($viewData);
 ?>
 
 <main>

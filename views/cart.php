@@ -1,7 +1,5 @@
 <?php
 include "./public/headers.php";
-require_once './models/CartModel.php';
-require_once './models/ProductModel.php';
 
 
 ?>

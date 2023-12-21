@@ -96,10 +96,6 @@ switch ($explodeUrl[3]) {
 
         break;
 
-        // $page = new PageController;
-        // $page->profile();
-
-        // break;
 
 
     default:

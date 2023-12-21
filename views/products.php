@@ -1,7 +1,10 @@
 <?php
 include "./public/headers.php";
-require_once './models/CartModel.php';
-require_once './models/ProductModel.php';
+
+global $viewData;
+$product = $viewData['product'];
+
+var_dump($viewData);
 
 ?>
 
@@ -14,23 +17,19 @@ require_once './models/ProductModel.php';
         <div class="productContainer">
             <?php foreach ($products as $product) { ?>
                 <div class="product">
-                    <img src="<?php echo $product['chemin']; ?>" class="my_img">
+                    <img src="./images/pic3" class="my_img">
                     <h2>
-                        <?php echo $product['nom']; ?>
+                        <?php echo $product['name']; ?>
                     </h2><br>
                     <p><b>Item Description:</b>
-                        <?php echo $product['item_description']; ?>
+                        <?php echo $product['description']; ?>
                     </p>
                     <span class="price"><b>Price:</b>$
-                        <?php echo $product['prix']; ?>
+                        <?php echo $product['price']; ?>
                     </span><br>
-                    <span class="price"><b>Color:</b>
-                        <?php echo $product['couleur']; ?>
-                    </span><br>
-                    <span class="price"><b>Size:</b>
-                        <?php echo $product['taille']; ?>
-                    </span><br><br>
-                    <a href="productDetail.php?id=<?php echo $product['id']; ?>" class="btn btn-primary"><i class="bi bi-eye-fill"></i> View Product</a>
+
+
+                    <a href="productDetail=<?php echo $product['id']; ?>" class="btn btn-primary"><i class="bi bi-eye-fill"></i> View Product</a>
                 </div>
 
 
