@@ -31,31 +31,26 @@ include "./public/headers.php";
                                 <?php
                                 foreach ($cart as $idProduct => $quant) {
                                     $product = getProductById($id);
-                                    $total = $quant * $product['prix'];
+                                    $total = $quant * $product['price'];
                                     $grandTotal += $total;
                                     $_SESSION['totals'] = $grandTotal;
                                 ?>
                                     <form method="post">
                                         <tr>
-                                            <input type="hidden" name="id_produit" value="<?php echo $idProduct; ?>">
+                                            <input type="hidden" name="id_product" value="<?php echo $idProduct; ?>">
                                             <td>
-                                                <?php echo $product['nom']; ?>
+                                                <?php echo $product['name']; ?>
                                             </td>
+
                                             <td>
-                                                <?php echo $product['taille']; ?>
+                                                <?php echo $product['price']; ?>
                                             </td>
-                                            <td>
-                                                <?php echo $product['couleur']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $product['prix']; ?>
-                                            </td>
-                                            <td><input min="1" max="<?php echo $product['quantite']; ?>" type="number" value="<?php echo $quant; ?>" name="Quant"></td>
+                                            <td><input min="1" max="<?php echo $product['qtty']; ?>" type="number" value="<?php echo $quant; ?>" name="Quant"></td>
                                             <td>
                                                 <?php echo $total; ?>
                                             </td>
                                             <td>
-                                                <?php echo $product['item_description']; ?>
+                                                <?php echo $product['description']; ?>
                                             </td>
                                             <td>
                                                 <button type="submit" class="btn btn-info" name="modifyProduct">

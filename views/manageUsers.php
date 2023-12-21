@@ -38,16 +38,16 @@ var_dump($viewData);
                                             <?php echo $user['id']; ?>
                                         </th>
                                         <td>
-                                            <?php echo $user['nom']; ?>
+                                            <?php echo $user['lname']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $user['prenom']; ?>
+                                            <?php echo $user['fname']; ?>
                                         </td>
                                         <td>
                                             <?php echo $user['email']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $user['roleU']; ?>
+                                            <?php echo $user['role_id']; ?>
                                         </td>
                                         <td>
                                             <a href="editUser.php?id=<?php echo $user['id']; ?>" class="btn btn-info btn-sm">Edit</a>

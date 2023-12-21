@@ -30,17 +30,17 @@ require_once './models/ProductModel.php';
                             </thead>
                             <tbody>
                                 <?php foreach ($commandes as $commande) {
-                                    $id_user = $commande['id_utilisateur'];
+                                    $id_user = $commande['id_user'];
                                     $user = getUserById($id_user) ?>
                                     <tr>
                                         <th scope="row">
                                             <?php echo $commande['id_commande']; ?>
                                         </th>
                                         <td>
-                                            <?php echo $commande['id_utilisateur']; ?>
+                                            <?php echo $commande['id_user']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $user['nom'] . " " . $user['prenom']; ?>
+                                            <?php echo $user['lname'] . " " . $user['fname']; ?>
                                         </td>
                                         <td>
                                             <?php echo $commande['date_commande']; ?>
@@ -50,14 +50,14 @@ require_once './models/ProductModel.php';
                                             $tab_commands = getCommandById($commande['id_commande']);
                                             foreach ($tab_commands as $key => $value) {
                                                 $product = getProductById($value['id_produit']); ?>
-                                                <?php echo $product['nom'] . " ==> <b>" . $value['quantity'] . "</b><br>"; ?>
+                                                <?php echo $product['nom'] . " ==> <b>" . $value['qtty'] . "</b><br>"; ?>
                                             <?php } ?>
                                         </td>
                                         <td>
                                             <?php echo $commande['total']; ?>
                                         </td>
                                         <td>
-                                            <a href="./deleteCommand.php?id=<?php echo $commande['id_commande']; ?>" class="btn btn-danger">
+                                            <a href="./deleteCommand?id=<?php echo $commande['id_commande']; ?>" class="btn btn-danger">
                                                 <i class="bi bi-trash3-fill">
                                                 </i>
                                             </a>

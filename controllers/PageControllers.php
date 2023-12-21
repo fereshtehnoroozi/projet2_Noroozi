@@ -59,7 +59,7 @@ class PageController
             exit();
         }
 
-        $cartItems = $this->cartModel->getCartItems();
+        $cartItems = $this->cartModel->getCartItems('id');
         include 'views/cart'; // Adjust the view file path
     }
 
@@ -143,6 +143,10 @@ class PageController
     }
 
     public function deleteUserById()
+    {
+    }
+
+    public function getProductById()
     {
     }
 }

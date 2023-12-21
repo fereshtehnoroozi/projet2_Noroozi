@@ -4,30 +4,29 @@ require_once './utils/Crud.php';
 
 class CartModel extends Crud
 {
-    public $id;
-    public $ref;
-    public $order_date;
-    public $total;
-    public $user_id;
-    public $table = 'user_order';
+    public $product_id;
+    public $qtty;
+    public $price;
+    public $user_order_id;
+    public $table = 'order_has_product';
 
-    public function addToCart($productId, $quantity)
+    public function addToCart($product_id, $quantity)
     {
         // Check if the product is already in the cart
-        $existingCartItem = $this->getCartItem($productId);
+        $existingCartItem = $this->getCartItem($product_id);
 
         if ($existingCartItem) {
             // Update the quantity if the product is already in the cart
-            $newQuantity = $existingCartItem['quantity'] + $quantity;
-            $this->updateCartItem($productId, $newQuantity);
+            $newQuantity = $existingCartItem['qtty'] + $quantity;
+            $this->updateCartItem($product_id, $newQuantity);
         } else {
             // Add a new item to the cart
             $cartItem = [
-                'product_id' => $productId,
-                'quantity' => $quantity,
+                'product_id' => $product_id,
+                'qtty' => $quantity,
             ];
 
-            $request = "INSERT INTO $this->table (product_id, quantity) VALUES (:product_id, :quantity)";
+            $request = "INSERT INTO $this->table (product_id, qtty) VALUES (:product_id, :qtty)";
             $this->add($request, $cartItem);
         }
     }
@@ -40,34 +39,34 @@ class CartModel extends Crud
         }
     }
 
-    public function removeFromCart($productId)
+    public function removeFromCart($product_id)
     {
         // Remove a product from the cart
         $request = "DELETE FROM $this->table WHERE product_id = :product_id";
-        $this->delete($request, $productId);
+        $this->delete($request, $product_id);
     }
 
     public function getCartItems($userId)
     {
         // Get all items in the cart for a specific user
-        $request = "SELECT * FROM $this->table WHERE user_id = :user_id";
-        return $this->getAll($request, ['user_id' => $userId]);
+        $request = "SELECT * FROM $this->table WHERE  user_order_id  = : user_order_id ";
+        return $this->getAll($request, ['order_has_product' => $userId]);
     }
 
-    private function getCartItem($productId)
+    private function getCartItem($product_id)
     {
         // Get a specific item in the cart by product ID
         $request = "SELECT * FROM $this->table WHERE product_id = :product_id";
-        return $this->getById($request, $productId);
+        return $this->getById($request, $product_id);
     }
 
-    private function updateCartItem($productId, $quantity)
+    private function updateCartItem($product_id, $quantity)
     {
         // Update the quantity of a specific item in the cart
-        $request = "UPDATE $this->table SET quantity = :quantity WHERE product_id = :product_id";
+        $request = "UPDATE $this->table SET qtty = :qtty WHERE product_id = :product_id";
         $cartItem = [
-            'product_id' => $productId,
-            'quantity' => $quantity,
+            'product_id' => $product_id,
+            'qtty' => $quantity,
         ];
         $this->updateById($request, $cartItem);
     }
