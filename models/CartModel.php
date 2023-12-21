@@ -4,7 +4,12 @@ require_once './utils/Crud.php';
 
 class CartModel extends Crud
 {
-    private $table = 'cart';
+    public $id;
+    public $ref;
+    public $order_date;
+    public $total;
+    public $user_id;
+    public $table = 'user_order';
 
     public function addToCart($productId, $quantity)
     {
@@ -42,12 +47,11 @@ class CartModel extends Crud
         $this->delete($request, $productId);
     }
 
-    public function getCartItems()
+    public function getCartItems($userId)
     {
-        // Get all items in the cart with product details
-        $request = "SELECT c.product_id, c.quantity, p.name, p.price FROM $this->table c
-                    JOIN product p ON c.product_id = p.id";
-        return $this->getAll($request);
+        // Get all items in the cart for a specific user
+        $request = "SELECT * FROM $this->table WHERE user_id = :user_id";
+        return $this->getAll($request, ['user_id' => $userId]);
     }
 
     private function getCartItem($productId)

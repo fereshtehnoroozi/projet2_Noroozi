@@ -5,34 +5,26 @@ class ProfileController
 {
     public function profile($userId)
     {
-        // Assuming you have a UserModel or similar class to fetch user profile data
-        $userModel = new UserModel(); // Adjust this based on your actual implementation
+        $userModel = new UserModel();
         $user = $userModel->getUserById($userId);
 
-        // Replace this with your actual logic to display the user profile
-        include 'views/header.php'; // Include your header file
-        include 'views/profile.php'; // Include the profile view file
-        include 'views/footer.php'; // Include your footer file
+
+        include 'views/profile.php';
     }
 
     public function editProfile($userId)
     {
-        // Assuming you have a UserModel or similar class to fetch user profile data
-        $userModel = new UserModel(); // Adjust this based on your actual implementation
+        $userModel = new UserModel();
         $user = $userModel->getUserById($userId);
 
-        // Replace this with your actual logic to edit the user profile
-        include 'views/header.php'; // Include your header file
-        include 'views/edit_profile.php'; // Include the edit profile view file
-        include 'views/footer.php'; // Include your footer file
+
+        include 'views/edit_profile.php';
     }
 
     public function updateProfile($userId)
     {
-        // Assuming you have a UserModel or similar class to update user profile data
-        $userModel = new UserModel(); // Adjust this based on your actual implementation
+        $userModel = new UserModel();
 
-        // Replace this with your actual logic to update the user profile
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Handle form submission to update user profile
             $updatedData = array(

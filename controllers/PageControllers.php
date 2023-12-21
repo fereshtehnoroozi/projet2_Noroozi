@@ -99,8 +99,9 @@ class PageController
     public function logout()
     {
         //traitement de log out 
-
-
+        session_start();
+        session_unset();
+        session_destroy();
 
         // Redirect or show a success message
         header('Location: ./home');
@@ -122,5 +123,26 @@ class PageController
         // Redirect or show a success message
         include 'views/manageUsers.php';
         exit();
+    }
+
+
+    public function profile()
+    {
+
+        $oUserModel = new UserModel;
+        $profile = $oUserModel->getUsers();
+
+        $viewData = [
+            'users' => $profile
+        ];
+        global $viewData;
+
+        // Redirect or show a success message
+        include 'views/profile.php';
+        exit();
+    }
+
+    public function deleteUserById()
+    {
     }
 }
